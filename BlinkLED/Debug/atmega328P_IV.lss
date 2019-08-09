@@ -1,0 +1,151 @@
+
+atmega328P_IV.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000013c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000000e8  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  0000013c  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000016c  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000028  00000000  00000000  000001ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000069c  00000000  00000000  000001d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000060e  00000000  00000000  00000870  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000021a  00000000  00000000  00000e7e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000048  00000000  00000000  00001098  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000036c  00000000  00000000  000010e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000049  00000000  00000000  0000144c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000018  00000000  00000000  00001495  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 5c 00 	jmp	0xb8	; 0xb8 <__vector_11>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  78:	0c 94 72 00 	jmp	0xe4	; 0xe4 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <main>:
+
+//const uint16_t 
+int main()
+{
+	//set output on PORTB pin5
+	DDRB|=_BV(PB5);
+  80:	25 9a       	sbi	0x04, 5	; 4
+	//reset timer1 control registers A B & C
+	TCCR1A=TCCR1B=TCCR1C=0;
+  82:	10 92 82 00 	sts	0x0082, r1	; 0x800082 <__TEXT_REGION_LENGTH__+0x7e0082>
+  86:	e1 e8       	ldi	r30, 0x81	; 129
+  88:	f0 e0       	ldi	r31, 0x00	; 0
+  8a:	10 82       	st	Z, r1
+  8c:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
+	//set scaler of 256 for TCCR1B
+	TCCR1B|=(_BV(CS12) & ~_BV(CS11) & ~_BV(CS10));
+  90:	80 81       	ld	r24, Z
+  92:	84 60       	ori	r24, 0x04	; 4
+  94:	80 83       	st	Z, r24
+	//set the value for output compare register A. This value is compared with Timer Counter register TCNT1
+	OCR1A=COMP_VAL; 
+  96:	82 e1       	ldi	r24, 0x12	; 18
+  98:	9a e7       	ldi	r25, 0x7A	; 122
+  9a:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+  9e:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+	//enable timer Output Compare A Match interrupt
+	TIMSK1|=_BV(OCIEA);  
+  a2:	ef e6       	ldi	r30, 0x6F	; 111
+  a4:	f0 e0       	ldi	r31, 0x00	; 0
+  a6:	80 81       	ld	r24, Z
+  a8:	82 60       	ori	r24, 0x02	; 2
+  aa:	80 83       	st	Z, r24
+	//enable global interrupts
+	sei();
+  ac:	78 94       	sei
+	//Initialize timer counter to 0;
+	TCNT1=TIMER_COUNTER_INIT;
+  ae:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+  b2:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+  b6:	ff cf       	rjmp	.-2      	; 0xb6 <main+0x36>
+
+000000b8 <__vector_11>:
+	
+	
+}
+
+ISR(TIMER1_COMPA_vect)
+{
+  b8:	1f 92       	push	r1
+  ba:	0f 92       	push	r0
+  bc:	0f b6       	in	r0, 0x3f	; 63
+  be:	0f 92       	push	r0
+  c0:	11 24       	eor	r1, r1
+  c2:	8f 93       	push	r24
+  c4:	9f 93       	push	r25
+	TCNT1=0;
+  c6:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+  ca:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+	PORTB^=_BV(PB5);// toggle led pin
+  ce:	95 b1       	in	r25, 0x05	; 5
+  d0:	80 e2       	ldi	r24, 0x20	; 32
+  d2:	89 27       	eor	r24, r25
+  d4:	85 b9       	out	0x05, r24	; 5
+}
+  d6:	9f 91       	pop	r25
+  d8:	8f 91       	pop	r24
+  da:	0f 90       	pop	r0
+  dc:	0f be       	out	0x3f, r0	; 63
+  de:	0f 90       	pop	r0
+  e0:	1f 90       	pop	r1
+  e2:	18 95       	reti
+
+000000e4 <_exit>:
+  e4:	f8 94       	cli
+
+000000e6 <__stop_program>:
+  e6:	ff cf       	rjmp	.-2      	; 0xe6 <__stop_program>
