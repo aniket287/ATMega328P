@@ -1,0 +1,1 @@
+This project contains files that form the basics of techniques used in Embedded C development. Use this Atmel Studio solution to brush up on Embedded C techniqus.
