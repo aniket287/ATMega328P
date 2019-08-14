@@ -1,0 +1,5 @@
+Copy paste these lines into Tools->External Tools in Atmel Studio to upload Code: Change COM port as required.
+
+C:\Program Files (x86)\Arduino\hardware\tools\avr/bin/avrdude.exe
+
+-C"C:\Program Files (x86)\Arduino\hardware\tools\avr/etc/avrdude.conf" -v -patmega32u4 -cavr109 -PCOM4 -b57600 -D -Uflash:w:"$(ProjectDir)Debug\$(TargetName).hex":i 
