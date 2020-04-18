@@ -2,4 +2,8 @@ Copy paste these lines into Tools->External Tools in Atmel Studio to upload Code
 
 C:\Program Files (x86)\Arduino\hardware\tools\avr/bin/avrdude.exe
 
+For atmega32U4:
 -C"C:\Program Files (x86)\Arduino\hardware\tools\avr/etc/avrdude.conf" -v -patmega32u4 -cavr109 -PCOM4 -b57600 -D -Uflash:w:"$(ProjectDir)Debug\$(TargetName).hex":i 
+
+For atmega328P:
+-C"C:\Program Files (x86)\Arduino\hardware\tools\avr/etc/avrdude.conf" -v -patmega328p -carduino -PCOM3 -b115200 -D -Uflash:w:"$(ProjectDir)Debug\$(TargetName).hex":i 
